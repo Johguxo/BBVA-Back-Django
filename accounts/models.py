@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class UserData(models.Model):
-    user = models.OneToOneField(User,on_delete=models.DO_NOTHING,related_name="userdata")
+    user = models.OneToOneField(User,on_delete=models.DO_NOTHING,related_name="userdata", default = "")
     about_me = models.TextField(default='', blank=True, null=True)
     date_of_birth = models.DateField(null=True, blank=True)
     is_fb_user = models.BooleanField(default=False)
@@ -16,7 +16,7 @@ class UserData(models.Model):
 
 class FacebookUser(models.Model):
     """ Model for facebook user """
-    user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User,on_delete=models.DO_NOTHING, default = "")
     id_facebook = models.CharField(max_length=250)
 
     def __str__(self):
@@ -25,7 +25,7 @@ class FacebookUser(models.Model):
 
 class GoogleUser(models.Model):
     """ Model for google user """
-    user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User,on_delete=models.DO_NOTHING, default = "")
     id_google = models.CharField(max_length=250)
 
     def __str__(self):
