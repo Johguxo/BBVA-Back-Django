@@ -148,29 +148,11 @@ class RegisterUserAPI(APIView):
         return Response(response_dict)
 
 class AuthenticateUserAPI(APIView):
-    """ API to authenticate a user """
-    # Still used but DEPRECATED, change future calls to new authenticate api
     permission_classes = [AllowAny]
 
     def get(self, request):
         """ Get method for the authentication of a user """
         context = {'request': request}
-        if ('email' not in self.request.query_params or
-            'password' not in self.request.query_params or
-                'loginType' not in self.request.query_params):
-            try:
-                logger.info(
-                    parse_login_request_log(
-                        request.META,
-                        request.query_params.items(),
-                        {'Kiwilex': 'Descarga nuestra aplicación aqui http://kiwilex.com/kiwi-info/'}.items(),
-                        True,
-                        False
-                    )
-                )
-            except:
-                print('Error login log')
-            return Response({'Kiwilex', 'Descarga nuestra aplicación aqui https://kiwilex.com/kiwi-info/'})
         email = self.request.query_params['email']
         password = request.query_params['password']
         login_type = request.query_params['loginType']
@@ -211,32 +193,16 @@ class AuthenticateUserAPI(APIView):
                         id_facebook = request.query_params['facebookId']
                         FacebookUser.objects.create(user=user,
                                                     id_facebook=id_facebook)
-                # else:
-                #    return Response({'status': False, 'app': {'status': False}})
             elif login_type == 'google':
                 user.userdata.is_google_user = True
                 user.userdata.save()
-                #password = '1234'
-                # user_google = authenticate(username=user.username,
-                #                           password=password)
-                # if user_google:
-                #    login(request, user_google)
                 if 'googleId' in request.query_params:
                     if not GoogleUser.objects.filter(user=user).exists():
                         id_google = request.query_params['googleId']
                         GoogleUser.objects.create(user=user,
                                                   id_google=id_google)
-                # else:
-                #    return Response({'status': False, 'app': {'status': False}})
             rest = None
-            person = UserData.objects.filter(user=user)
-            id_person = None
-            if person.exists():
-                id_person = person.last().id_kiwilex
-            user = UserSerializer(user, context=context)
-            user_data = UserData.objects.filter(user=obj_user).last()
-            succesful_response = {
-                'rest': rest, 'user': user.data, 'status': True,
+            succesful_response = {'status': True,
             }
             try:
                 logger.info(
