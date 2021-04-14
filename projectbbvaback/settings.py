@@ -152,8 +152,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     )
 }
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1065204393889-2dp0jsbacd36n5th00c9ra2bfotmcva2.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xyz14f9VaEj19GOg2N8GnDRu'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '445500558816-d6j4ao5dddhgboh6455rdtlsbh0dbl0n.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'hkli-yT3vEX6mbkbh9CxoJK4'
 
 SOCIAL_AUTH_FACEBOOK_KEY='162498612429162'
 SOCIAL_AUTH_FACEBOOK_SECRET='9c80d109dec6b407d1f30f96a5651ca4'
